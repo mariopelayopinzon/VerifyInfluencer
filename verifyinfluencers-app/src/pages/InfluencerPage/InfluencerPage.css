@@ -1,0 +1,250 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.influencer-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Nuevos estilos para componentes */
+.influencer-name {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.influencer-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.category-tag {
+  background-color: rgba(0, 128, 128, 0.2);
+  color: teal;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+.performance-metrics {
+  display: flex;
+  justify-content: space-between;
+  background-color: #1a1a1a;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: teal;
+}
+
+.metric-label {
+  color: #a0a0a0;
+  font-size: 0.8rem;
+}
+
+.claims-search-container {
+  display: flex;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.claims-search-input {
+  flex-grow: 1;
+  padding: 10px;
+  background-color: #1a1a1a;
+  border: 1px solid gray;
+  color: white;
+  border-radius: 5px;
+}
+
+.search-claims-btn {
+  background-color: teal;
+  color: white;
+  border: 1px solid gray;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-claims-btn:hover {
+  background-color: #008080;
+}
+
+.claims-summary {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.claims-title {
+  color: white;
+  margin-bottom: 15px;
+  border-bottom: 1px solid gray;
+  padding-bottom: 10px;
+}
+
+.claims-count {
+  color: #a0a0a0;
+  margin-bottom: 15px;
+}
+
+.claims-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.claim-card {
+  background-color: #2a2a2a;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.claim-content {
+  flex-grow: 1;
+  margin-right: 15px;
+}
+
+.claim-description {
+  margin-bottom: 10px;
+  color: white;
+}
+
+.claim-metadata {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.claim-category {
+  background-color: rgba(0, 128, 128, 0.2);
+  color: teal;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 0.7rem;
+}
+
+.claim-status {
+  font-size: 0.8rem;
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+.claim-status.verified {
+  background-color: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+}
+
+.claim-status.questionable {
+  background-color: rgba(241, 196, 15, 0.2);
+  color: #f1c40f;
+}
+
+.claim-status.debunked {
+  background-color: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+.view-details-btn {
+  background-color: teal;
+  color: white;
+  border: 1px solid gray;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-details-btn:hover {
+  background-color: #008080;
+}
+
+/* Estilos de carga y error */
+.loading-container,
+.error-container,
+.no-data-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .influencer-container {
+      padding: 10px;
+      width: 100%;
+  }
+
+  .influencer-name {
+      font-size: 2rem;
+  }
+
+  .performance-metrics {
+      flex-direction: column;
+      gap: 15px;
+  }
+
+  .claims-search-container {
+      flex-direction: column;
+  }
+
+  .claims-search-input,
+  .search-claims-btn {
+      width: 100%;
+  }
+
+  .claim-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+  }
+
+  .claim-metadata {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+      width: 100%;
+  }
+}
+
+/* Animaciones sutiles */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.claim-card,
+.category-tag,
+.metric-item {
+  animation: fadeIn 0.5s ease;
+}

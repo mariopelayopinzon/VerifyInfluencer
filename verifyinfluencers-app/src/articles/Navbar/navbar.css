@@ -1,0 +1,61 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-around;
+    background-color: rgba(0, 0, 0, 0.826) !important; 
+    color:rgb(2, 3, 3);
+    height: 35px;
+    width: 100%;
+    max-width: 1560px;
+    margin-top: 1px;
+}
+
+.Logo-navbar{
+    display: flex;
+    gap: .5;
+    font-weight: 500;
+    left: 0;
+    background-image: linear-gradient(to right, rgb(11, 241, 203), rgb(10, 221, 240), rgb(0, 81, 255));
+    background-size: 100%;
+    background-clip: text;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+
+}
+
+
+.links-navbar ul {
+    display: flex;
+    gap: 1.5rem;
+    right: 0;
+    color: white;
+    padding-left: 80px;
+    font-size: 12px;
+    list-style: none;
+
+}
+
+.Research-tasks {
+    color: white;
+    font-weight: 1000;
+}
+
+.button-dashboard {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 30px;
+    gap: 1rem;
+    background-color: rgba(0, 0, 0, 0.705);
+
+}
