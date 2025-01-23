@@ -1,249 +1,255 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: black;
-    color: white;
-    font-family: Arial, sans-serif;
+  background-color: black;
+  color: white;
+  font-family: Arial, sans-serif;
 }
 
 .main-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    border: 2px solid gray;
-    background-color: black;
-    padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 2px solid gray;
+  background-color: black;
+  padding: 20px;
 }
 
 .research-container {
-    display: flex;
-    padding: 25px;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 0.4rem;
+  display: flex;
+  padding: 25px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .main-title {
-    color: white;
-    font-weight: 700;
+  color: white;
+  font-weight: 700;
 }
 
 .contenedor-botones {
-    display: flex;
-    justify-content: center; 
-    gap: 20px;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
 }
 
 .btn-specific {
-    flex: 1;
+  flex: 1;
 }
 
-.btn-specific-influencer, 
+.btn-specific-influencer,
 .btn-discover-new {
-    width: 100%;
-    padding: 30px;
-    text-align: center;
-    border: 2px solid gray;
-    border-radius: 10px;
-    background-color: rgba(48, 47, 47, 0.331);
-    color: white; 
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
+  width: 100%;
+  padding: 30px;
+  text-align: center;
+  border: 2px solid gray;
+  border-radius: 10px;
+  background-color: rgba(48, 47, 47, 0.331);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .btn-specific-influencer:hover,
 .btn-discover-new:hover {
-    background-color: rgba(46, 204, 113, 0.5);
-    border: 2px solid #2ecc71;
+  background-color: rgba(46, 204, 113, 0.5);
+  border: 2px solid #2ecc71;
 }
 
 .parrafo-btn {
-    margin-top: 10px;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.7);
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .main-content {
-    border: 2px solid gray;    
-    padding: 20px; 
-    margin: 20px 0;
-    background-color: rgb(55, 53, 53);
+  border: 2px solid gray;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: rgb(55, 53, 53);
 }
 
 .second-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    background-color: rgb(55, 53, 53);
-    gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: rgb(55, 53, 53);
+  gap: 20px;
 }
 
 .second-section-container {
-    flex: 1;
-    background-color: rgba(30, 29, 29, 0.559);
-    padding: 20px;
+  flex: 1;
+  background-color: rgba(30, 29, 29, 0.559);
+  padding: 20px;
 }
 
 .title-time {
-    color: white;
-    font-weight: 500;
-    margin-bottom: 10px;
-    background-color: rgb(55, 53, 53);
+  color: white;
+  font-weight: 500;
+  margin-bottom: 10px;
+  background-color: rgb(55, 53, 53);
 }
 
 .btns-container {
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    width: 100%;
-    padding: 20px; 
-    background-color: rgba(30, 29, 29, 0.559);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  padding: 20px;
+  background-color: rgba(30, 29, 29, 0.559);
 }
 
 .time-btns {
-    width: 100%;
-    padding: 15px;
-    text-align: center;
-    border: 2px solid gray;
-    border-radius: 10px;
-    background-color: rgba(48, 47, 47, 0.331);
-    color: white;
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+  border: 2px solid gray;
+  border-radius: 10px;
+  background-color: rgba(48, 47, 47, 0.331);
+  color: white;
 }
 
 .time-btns:hover {
-    background-color: rgba(46, 204, 113, 0.5);
-    border: 2px solid #2ecc71;
+  background-color: rgba(46, 204, 113, 0.5);
+  border: 2px solid #2ecc71;
 }
 
 .Products-finder {
-    flex: 1;
-    background-color: rgb(55, 53, 53);
-    padding: 20px;
+  flex: 1;
+  background-color: rgb(55, 53, 53);
+  padding: 20px;
 }
 
 .title-products {
-    position: relative;
-    justify-content: flex-start;
-    padding-right: 350px;
-    margin-bottom: 10px;
-    background-color: rgb(55, 53, 53);
+  position: relative;
+  justify-content: flex-start;
+  padding-right: 350px;
+  margin-bottom: 10px;
+  background-color: rgb(55, 53, 53);
 }
 
 .h-productsfinder {
-    color: white;
-    font-weight: 500;
-    padding-top: 10px;
-    margin-bottom: 10px;
-    background-color: rgb(55, 53, 53);
+  color: white;
+  font-weight: 500;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(55, 53, 53);
 }
 
 .research-input {
-    width: 100%;
-    background-color: rgba(30, 29, 29, 0.559);
-    border: 2px solid gray;
-    border-radius: 10px;
-    color: white;
-    padding: 5px;
-    font-weight: 300;
+  width: 100%;
+  background-color: rgba(30, 29, 29, 0.559);
+  border: 2px solid gray;
+  border-radius: 10px;
+  color: white;
+  padding: 5px;
+  font-weight: 300;
 }
 
 .skip-research {
-    color: rgb(181, 179, 179);
-    background-color: rgb(55, 53, 53);
+  color: rgb(181, 179, 179);
+  background-color: rgb(55, 53, 53);
 }
 
 .Analysis-container {
-    background-color: rgba(30, 29, 29, 0.559);
-    display: flex;
-    padding: 20px;
-    align-items: center;
-    justify-content: space-between;
+  background-color: rgba(30, 29, 29, 0.559);
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .heading-analysis {
-    color: white;
+  color: white;
 }
 
 .p-analysis {
-    color: gray;
-    margin-right: 10px;
+  color: gray;
+  margin-right: 10px;
 }
 
 .name-container {
-    display: flex;
-    padding: 10px;
-    gap: 20px;
-    align-items: center;
-    background-color: rgb(55, 53, 53);
+  display: flex;
+  padding: 10px;
+  gap: 20px;
+  align-items: center;
+  background-color: rgb(55, 53, 53);
 }
 
 .influencer-name {
-    color: white;
-    background-color: rgb(55, 53, 53);
+  color: white;
+  background-color: rgb(55, 53, 53);
 }
 
 .influencer-input {
-    border: 1px solid gray;
-    border-radius: 5px;
-    width: 500px;
-    padding: 5px 15px;
-    color: rgb(171, 170, 170);
+  border: 1px solid gray;
+  border-radius: 5px;
+  width: 500px;
+  padding: 5px 15px;
+  color: rgb(171, 170, 170);
 }
 
 .footer-container {
-    padding: 10px;
-    background-color: rgb(55, 53, 53);
+  padding: 10px;
+  background-color: rgb(55, 53, 53);
 }
 
 .footer-heading {
-    color: white;
-    font-size: 12px;
-    background-color: rgb(55, 53, 53);
+  color: white;
+  font-size: 12px;
+  background-color: rgb(55, 53, 53);
 }
 
 .btn-container {
-    display: flex;
-    justify-content: flex-end;
-    padding: 15px;
-    background-color: rgb(55, 53, 53);
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px;
+  background-color: rgb(55, 53, 53);
 }
 
 .action-btn {
-    background-color: rgba(92, 92, 92, 0.751);
-    padding: 10px;
-    color: white;
-    border-radius: 5px;
-    font-weight: 700;
-    border: 2px solid gray;
+  background-color: rgba(92, 92, 92, 0.751);
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+  font-weight: 700;
+  border: 2px solid gray;
 }
 
 .action-btn:hover {
-    background-color: rgba(13, 158, 35, 0.751);
+  background-color: rgba(13, 158, 35, 0.751);
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .second-section {
-        flex-direction: column;
-    }
+  .second-section {
+    flex-direction: column;
+  }
 
-    .contenedor-botones {
-        flex-direction: column;
-    }
+  .contenedor-botones {
+    flex-direction: column;
+  }
 
-    .btns-container {
-        grid-template-columns: 1fr;
-    }
+  .btns-container {
+    grid-template-columns: 1fr;
+  }
 
-    .influencer-input {
-        width: 100%;
-    }
+  .influencer-input {
+    width: 100%;
+  }
+}
+
+.time-btns.active,
+.btn-specific-influencer.active,
+.btn-discover-new.active {
+  background-color: rgb(78, 195, 125);
 }

@@ -1,51 +1,51 @@
-import axios from 'axios';
+import axios from "axios";
 
 class PerplexityService {
   constructor() {
     this.cache = new Map();
-    this.CACHE_DURATION = 24 * 60 * 60 * 1000; 
-    this.API_URL = import.meta.env.VITE_PERPLEXITY_API_URL; 
-    this.API_TOKEN = import.meta.env.VITE_PERPLEXITY_TOKEN; 
+    this.CACHE_DURATION = 24 * 60 * 60 * 1000;
+    this.API_URL = "https://api.perplexity.ai/chat/completions";
+    this.API_TOKEN = "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";
 
     // Validate API URL and Token
     if (!this.API_URL || !this.API_TOKEN) {
-      throw new Error('API URL or Token is not defined in environment variables.');
+      throw new Error(
+        "API URL or Token is not defined in environment variables."
+      );
     }
   }
 
   async makeRequest(prompt, options = {}) {
-    
     try {
       const body = {
         model: "llama-3.1-sonar-small-128k-online",
         messages: [
-          { role: "system", content: "Provide precise and scientific analysis." },
+          {
+            role: "system",
+            content: "Provide precise and scientific analysis.",
+          },
           { role: "user", content: prompt },
         ],
         temperature: 0.2,
         top_p: 0.9,
-        ...options
+        ...options,
       };
 
-      const response = await axios.post(
-        this.API_URL, 
-        body, 
-        {
-          headers: {
-            Authorization: `Bearer ${this.API_TOKEN}`,
-            "Content-Type": "application/json",
-          },
-          timeout: 10000,
-        }
+      const response = await axios.post(this.API_URL, body, {
+        headers: {
+          Authorization: `Bearer ${this.API_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        timeout: 10000,
+      });
+
+      console.log("API Response:", response.data);
+
+      const cleanedResponse = this.cleanResponse(
+        response.data.choices[0].message.content
       );
-
-      console.log('API Response:', response.data);
-      
-
-      const cleanedResponse = this.cleanResponse(response.data.choices[0].message.content);
       const parsedResponse = this.parseResponse(cleanedResponse);
 
-      
       return parsedResponse;
     } catch (error) {
       this.handleError(error);
@@ -70,43 +70,43 @@ class PerplexityService {
   }
 
   cleanResponse(content) {
-    console.log(content, 'content')
-    return content
-      .replaceAll("```", "")
-      .replace(/^json/i, '')
-      .trim();
+    console.log(content, "content");
+    return content.replaceAll("```", "").replace(/^json/i, "").trim();
   }
 
   parseResponse(content) {
-    console.log(content, 'parseResponse')
+    console.log(content, "parseResponse");
     try {
       const parsed = JSON.parse(content);
-      console.log(parsed, 'parsed')
+      console.log(parsed, "parsed");
       this.validateResponse(parsed);
       return parsed;
     } catch (error) {
-      console.log('parsedResponse', error)
-      // throw new Error('Invalid response format');
+      console.log("parsedResponse", parsedResponse)
     }
   }
 
   validateResponse(data) {
     if (!data) {
-      throw new Error('Empty response');
+      throw new Error("Empty response");
     }
   }
 
   handleError(error) {
     if (axios.isAxiosError(error)) {
       if (error.response) {
-        console.error('API Error:', error.response.data);
-        throw new Error(`API Error: ${error.response.status} - ${error.response.data.message || ''}`);
+        console.error("API Error:", error.response.data);
+        throw new Error(
+          `API Error: ${error.response.status} - ${
+            error.response.data.message || ""
+          }`
+        );
       } else if (error.request) {
-        console.error('No response received');
-        throw new Error('No response received from server');
+        console.error("No response received");
+        throw new Error("No response received from server");
       }
     }
-    console.error('Unexpected error:', error);
+    console.error("Unexpected error:", error);
     throw error;
   }
 
@@ -138,19 +138,25 @@ class PerplexityService {
   }
 
   async searchInfluencerDetails(options) {
-    console.log(options, 'totototo')
+   
     const prompt = `
       Provide detailed analysis for the health influencer ${options.influencerName}. 
       Include:
+      - Brief description of the influencer
       - Verified claims
+      - Products
       - Research categories
       - Detailed performance metrics
       - Monetization strategies
+      - Influencer's "X" username without the @
 
       Respond in JSON format with these fields, do not add anything else to the response just the JSON format, nothing else:
       {
         "name": "Influencer Name",
+        "X": "Influencer X username",
+        "description": "Influencer Description",
         "totalClaims": "Number of verified claims",
+        "productsPerInfluencer": "Number of recommended products from the influencer",
         "categories": ["Category1", "Category2"],
         "performanceMetrics": {
           "trustScore": "Percentage",
@@ -162,7 +168,9 @@ class PerplexityService {
             "claim": "Specific claim description",
             "category": "Research category",
             "verificationStatus": "Verified/Pending/Debunked",
-            "sources": ["Research source 1", "Research source 2"]
+            "sources": ["Research source 1", "Research source 2"],
+            "url":"source url"
+            "trustScore": "Percentage"
           }
         ],
         "monetizationStrategies": [
@@ -170,17 +178,16 @@ class PerplexityService {
           "Strategy 2"
         ]
       }
-    `; console.log(prompt, 'prompting.')
-
-return; 
- 
+    `;
+    console.log(prompt, "prompting.");
 
     const response = await this.makeRequest(prompt, {
       search_domain_filter: ["perplexity.ai"],
       return_related_questions: false,
+      return_images: false, 
     });
-    console.log(response, 'response')
-    return response; 
+    console.log(response, "response");
+    return response;
   }
 
   // Method to clear cache
@@ -192,7 +199,7 @@ return;
   getCacheStats() {
     return {
       size: this.cache.size,
-      entries: Array.from(this.cache.keys())
+      entries: Array.from(this.cache.keys()),
     };
   }
 }
