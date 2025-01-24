@@ -135,14 +135,16 @@ class PerplexityService {
   }
 
   async searchInfluencerDetails(options) {
+    console.log('options', options)
     const prompt = `
       Provide detailed analysis for the health influencer ${options.influencerName}. 
       Include:
-      - Brief description of the influencer - Verified claims
+      - Brief description of the influencer - Verified claims minimun of ${options.claimsPerInfluencer}
       - Products
       - Research categories
       - Detailed performance metrics
       - Monetization strategies
+      - Number of Influencer claims 
       - Influencer's "X" username without the @
 
       Respond in JSON format with these fields, do not add anything else to the response just the JSON format, nothing else:
@@ -151,7 +153,7 @@ class PerplexityService {
         "xusername": "Influencer X username",
         "description": "Influencer Description",
         "totalClaims": "Number of verified claims",
-        "productsPerInfluencer": "Number of recommended products from the influencer",
+        "productsPerInfluencer": "Number of recommended products from the influencer, give me an specific number, not wording",
         "categories": ["Category1", "Category2"],
         "performanceMetrics": {
           "trustScore": "Percentage",

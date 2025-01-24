@@ -39,66 +39,7 @@ const InfluencerPage = () => {
   }, [profilePhotoUrl]);
   //ctx.state.currentInfluencer
   const influencerDetails = {
-    name: "Sanjay Gupta",
-    totalClaims: "57",
-    description:
-      "Sanjay is a medical journalist and a CNN chief medical correspondent. He has been a part of",
-    categories: ["Health", "Medicine", "Innovation"],
-    performanceMetrics: {
-      trustScore: "High",
-      revenueEstimate: "$1M - $5M yearly revenue",
-      productsPerInfluencer: " 15 recommended",
-      followers: "2.5M",
-    },
-    claims: [
-      {
-        claim: "Expertise in neurosurgery and interventional radiology",
-        category: "Health",
-        verificationStatus: "Verified",
-        claimstrustScore: "87%",
-        sources: ["Emory University Hospital", "CNN"],
-        url: "https://faculty.mdanderson.org/profiles/sanjay_gupta.html",
-      },
-      {
-        claim:
-          "Research focus on targeted drug delivery methods for cancer treatment",
-        category: "Health",
-        verificationStatus: "Verified",
-        claimstrustScore: "87%",
-        sources: ["The University of Texas MD Anderson Cancer Center"],
-        url: "https://faculty.mdanderson.org/profiles/sanjay_gupta.html",
-      },
-      {
-        claim: "Highly influential in the healthcare space with 2.5M followers",
-        category: "Health",
-        verificationStatus: "Verified",
-        claimstrustScore: "87%",
-        sources: ["Agility PR"],
-        url: "https://www.agilitypr.com/resources/top-influencers/top-10-us-social-media-influencers-healthcare/",
-      },
-      {
-        claim: "Highly influential in the healthcare space with 2.5M followers",
-        category: "Health",
-        verificationStatus: "Verified",
-        claimstrustScore: "87%",
-        sources: ["Agility PR"],
-        url: "https://www.agilitypr.com/resources/top-influencers/top-10-us-social-media-influencers-healthcare/",
-      },
-      {
-        claim: "Highly influential in the healthcare space with 2.5M followers",
-        category: "Health",
-        verificationStatus: "Verified",
-        claimstrustScore: "87%",
-        sources: ["Agility PR"],
-        url: "https://www.agilitypr.com/resources/top-influencers/top-10-us-social-media-influencers-healthcare/",
-      },
-    ],
-    monetizationStrategies: [
-      "Influencer marketing partnerships",
-      "Sponsored health tips and advice",
-      "Licensing his expertise for media appearances",
-    ],
-    ...ctx.state.currentInfluencer,
+     ...ctx.state.currentInfluencer,
   };
 
   const handleSearchClaims = () => {
