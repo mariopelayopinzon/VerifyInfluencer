@@ -39,7 +39,6 @@ class PerplexityService {
         timeout: 10000,
       });
 
-      console.log("API Response:", response.data);
 
       const cleanedResponse = this.cleanResponse(
         response.data.choices[0].message.content
@@ -70,15 +69,12 @@ class PerplexityService {
   }
 
   cleanResponse(content) {
-    console.log(content, "content");
     return content.replaceAll("```", "").replace(/^json/i, "").trim();
   }
 
   parseResponse(content) {
-    console.log(content, "parseResponse");
     try {
       const parsed = JSON.parse(content);
-      console.log(parsed, "parsed");
       this.validateResponse(parsed);
       return parsed;
     } catch (error) {
@@ -178,14 +174,12 @@ class PerplexityService {
         ]
       }
     `;
-    console.log(prompt, "prompting.");
 
     const response = await this.makeRequest(prompt, {
       search_domain_filter: ["perplexity.ai"],
       return_related_questions: false,
       return_images: false, 
     });
-    console.log(response, "response");
     return response;
   }
 

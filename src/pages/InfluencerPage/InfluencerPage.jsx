@@ -15,10 +15,8 @@ const InfluencerPage = () => {
   const fetchProfilePhoto = async () => {
     try {
       const username = ctx.state.currentInfluencer.xusername;
-      console.log("username: ", username);
 
-      const BEARER_TOKEN =
-        "AAAAAAAAAAAAAAAAAAAAALkZyQEAAAAAguPE9Gi8Fn4ue6xKzq27JdjGPiw%3DVWLd0ePNWaW3SYSuxSYiltycOzeRT9YlAnO6T1TBkI9GI8IWPT";
+      const BEARER_TOKEN = import.meta.env.VITE_TWITTER_BEARER_TOKEN;
       const url = `/twitter-api/2/users/by/username/${username}?user.fields=profile_image_url`;
 
       const response = await axios.get(url, {
@@ -27,11 +25,7 @@ const InfluencerPage = () => {
           "Content-Type": "application/json", // Opcional
         },
       });
-      console.log("response.data", response.data.data);
-      console.log(
-        "response.data.profile_image_url",
-        response.data.profile_image_url
-      );
+     
 
       setProfilePhotoUrl(response.data.data.profile_image_url);
     } catch (error) {

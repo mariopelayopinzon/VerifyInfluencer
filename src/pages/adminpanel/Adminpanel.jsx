@@ -71,7 +71,6 @@ const Adminpanel = () => {
           searchOptions
         );
 
-        console.log("resultsxxx", results);
 
         dispatch({
           type: "SET_CURRENT_INFLUENCER",
@@ -115,7 +114,7 @@ const Adminpanel = () => {
         journals: [],
       }}
       onSubmit={(values, { setSubmitting }) => {
-        console.log(values);
+        
         // addInfluencerInfo(values);
         search(values); // Call search without passing searchData
         // setSubmitting(false);
@@ -304,7 +303,6 @@ const Adminpanel = () => {
               <div className="section-journals">
                 <Scientificjournals
                   onJournalSelect={(data) => {
-                    console.log("ss", data);
                     setFieldValue("journals", data);
                   }}
                 />

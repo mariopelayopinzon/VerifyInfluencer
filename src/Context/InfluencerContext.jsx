@@ -75,7 +75,6 @@ export const InfluencerProvider = ({ children }) => {
   const [state, dispatch] = useReducer(influencerReducer, initialState);
 
   const fetchTwitterProfileImage = async (username) => {
-    console.log("fetchTwitterProfileImage strart");
 
     const cleanUsername = String(username)
       .replace("@", "")
@@ -109,8 +108,6 @@ export const InfluencerProvider = ({ children }) => {
       const user = await client.v2.userByUsername(cleanUsername, {
         "user.fields": ["profile_image_url"],
       });
-      console.log("cleanUsername", cleanUsername);
-      console.log("user", user);
       if (user.data?.profile_image_url) {
         const profilePhotoUrl = user.data.profile_image_url.replace(
           "_normal",
@@ -127,7 +124,6 @@ export const InfluencerProvider = ({ children }) => {
 
       return null;
     } catch (error) {
-      console.log("InfluencerProvider.error", error);
       //   console.error("Error fetching Twitter profile photo", {
       //     message: error.message,
       //     code: error.code,
