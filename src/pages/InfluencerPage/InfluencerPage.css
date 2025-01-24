@@ -287,7 +287,7 @@
 }
 
 .percentage-trustScore[data-trustscore^="7"],
-.percentage-trustScore[data-trustscore="89"] {
+.percentage-trustScore[data-trustscore="80"] {
   color: yellow;
 }
 .percentage-trustScore[data-trustscore^="7"],
