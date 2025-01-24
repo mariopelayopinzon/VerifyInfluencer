@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useInfluencerContext } from "../../context/InfluencerContext";
+import { useInfluencerContext } from "../../Context/InfluencerContext";
 import "../InfluencerPage/InfluencerPage.css";
 import "boxicons";
 import axios from "axios";
