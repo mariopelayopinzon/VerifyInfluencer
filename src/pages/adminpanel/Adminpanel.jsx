@@ -6,7 +6,7 @@ import { Switch, Textarea, useToast } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import Scientificjournals from "../../components/journals.jsx";
 import { perplexityService } from "../../services/perplexityapi.js";
-import { useInfluencerContext } from "../../context/InfluencerContext";
+import { useInfluencerContext } from "../../Context/InfluencerContext";
 
 const Adminpanel = () => {
   const navigate = useNavigate();

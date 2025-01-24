@@ -13,7 +13,7 @@ import Adminpanel from './pages/adminpanel/Adminpanel.jsx';
 import './index.css'
 import Leaderboard from './pages/Leaderboard/LeaderPage.jsx';
 import InfluencerPage from './pages/InfluencerPage/InfluencerPage.jsx';
-import { InfluencerProvider } from './context/InfluencerContext';
+import { InfluencerProvider } from './Context/InfluencerContext';
 
 // Layout con Navbar que envuelve todas las páginas
 function Layout() {
