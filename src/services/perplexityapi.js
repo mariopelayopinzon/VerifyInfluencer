@@ -3,15 +3,13 @@ import axios from "axios";
 class PerplexityService {
   constructor() {
     this.cache = new Map();
-    this.CACHE_DURATION = 24 * 60 * 60 * 1000;
+    this.CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
     this.API_URL = import.meta.env.VITE_PERPLEXITY_API_URL;
     this.API_TOKEN = import.meta.env.VITE_PERPLEXITY_TOKEN;
 
     // Validate API URL and Token
     if (!this.API_URL || !this.API_TOKEN) {
-      throw new Error(
-        "API URL or Token is not defined in environment variables."
-      );
+      throw new Error("API URL or Token is not defined in environment variables.");
     }
   }
 
@@ -31,6 +29,8 @@ class PerplexityService {
         ...options,
       };
 
+      // Log the request body
+
       const response = await axios.post(this.API_URL, body, {
         headers: {
           Authorization: `Bearer ${this.API_TOKEN}`,
@@ -40,10 +40,18 @@ class PerplexityService {
       });
 
 
+      if (!response.data.choices || response.data.choices.length === 0) {
+        throw new Error('API response does not contain any choices')
+      }
+
+
       const cleanedResponse = this.cleanResponse(
         response.data.choices[0].message.content
       );
+
+
       const parsedResponse = this.parseResponse(cleanedResponse);
+
 
       return parsedResponse;
     } catch (error) {
@@ -69,16 +77,19 @@ class PerplexityService {
   }
 
   cleanResponse(content) {
-    return content.replaceAll("```", "").replace(/^json/i, "").trim();
+    const cleaned = content.replaceAll("```", "").replace(/^json/i, "").trim();
+    return cleaned;
   }
 
   parseResponse(content) {
     try {
       const parsed = JSON.parse(content);
+      ("Parsed JSON:", parsed); // Log the parsed JSON
       this.validateResponse(parsed);
       return parsed;
     } catch (error) {
       console.error("Error parsing response:", error); // Log the error directly
+      console.error("Response content was:", content); // Log the content that failed to parse
       throw new Error("Failed to parse response"); // Optionally throw an error
     }
   }
@@ -94,9 +105,7 @@ class PerplexityService {
       if (error.response) {
         console.error("API Error:", error.response.data);
         throw new Error(
-          `API Error: ${error.response.status} - ${
-            error.response.data.message || ""
-          }`
+          `API Error: ${error.response.status} - ${error.response.data.message || ""}`
         );
       } else if (error.request) {
         console.error("No response received");
@@ -135,25 +144,24 @@ class PerplexityService {
   }
 
   async searchInfluencerDetails(options) {
-    console.log('options', options)
     const prompt = `
-      Provide detailed analysis for the health influencer ${options.influencerName}. 
+      Provide detailed analysis for the health influencer ${options.influencerName}
       Include:
-      - Brief description of the influencer - Verified claims minimun of ${options.claimsPerInfluencer}
+      - Brief description of the influencer - Verified claims minimum of ${options.claimsPerInfluencer} claims.
       - Products
       - Research categories
       - Detailed performance metrics
       - Monetization strategies
       - Number of Influencer claims 
       - Influencer's "X" username without the @
-
-      Respond in JSON format with these fields, do not add anything else to the response just the JSON format, nothing else:
+      -  Provide articles links to studies that can confirm or debunk, the influencers claims.
+      Please provide at least ${options.claimsPerInfluencer} claims in the response. Respond in JSON format with these fields, do not add anything else to the response just the JSON format, nothing else:
       {
         "name": "Influencer Name",
         "xusername": "Influencer X username",
         "description": "Influencer Description",
         "totalClaims": "Number of verified claims",
-        "productsPerInfluencer": "Number of recommended products from the influencer, give me an specific number, not wording",
+        "productsPerInfluencer": "Number of recommended products from the influencer, give me a specific number, not wording",
         "categories": ["Category1", "Category2"],
         "performanceMetrics": {
           "trustScore": "Percentage",
@@ -165,7 +173,7 @@ class PerplexityService {
             "claim": "Specific claim description",
             "category": "Research category",
             "verificationStatus": "Verified/Pending/Debunked",
-            "sources": ["Research source 1", "Research source 2"],
+            "ResearchSources": ["Research source 1", "Research source 2"],
             "url":"source url",
             "claimtrustScore": "Percentage"
           }

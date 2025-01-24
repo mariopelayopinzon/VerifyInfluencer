@@ -37,10 +37,11 @@ const InfluencerPage = () => {
   useEffect(() => {
     if (!profilePhotoUrl) fetchProfilePhoto();
   }, [profilePhotoUrl]);
-  //ctx.state.currentInfluencer
+  ctx.state.currentInfluencer
   const influencerDetails = {
+
      ...ctx.state.currentInfluencer,
-  };
+  }
 
   const handleSearchClaims = () => {
     if (!influencerDetails) return;
@@ -175,9 +176,12 @@ const InfluencerPage = () => {
                     View Source
                   </button>{" "}
                 </div>
+                <div className="ResearchSource">
+                  <span className="answerSource">{claim.ResearchSources}.</span>
+                </div>
                 <div className="claim-trustScore">
                   <span className="title-trustScore">Trust Score</span>
-                  <span className="percentage-trustScore" data-trustscore='85%'>
+                  <span className="percentage-trustScore" data-trustscore={claim.claimtrustScore}>
                     {claim.claimtrustScore}%
                   </span>
                 </div>

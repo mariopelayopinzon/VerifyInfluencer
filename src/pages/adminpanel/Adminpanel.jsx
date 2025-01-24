@@ -63,9 +63,10 @@ const Adminpanel = () => {
             includeRevenueAnalysis: data.includeRevenueAnalysis,
             verifyWithScientificJournals: data.verifyWithScientificJournals,
             researchNotes: data.researchNotes,
-            journals: data.journals, // Include journals in search options
+            journals: selectedJournals, // Include journals in search options
           },
         };
+
 
         const results = await perplexityService.searchInfluencerDetails(
           searchOptions
@@ -93,13 +94,12 @@ const Adminpanel = () => {
         console.error(err);
       }
     },
-    [dispatch, toast, navigate, searchData, activeButton]
+    [dispatch, toast, navigate, selectedJournals] // Removed searchData and activeButton from dependencies
   );
-  const handleJournalSelection = (selectedJournals) => {
+
+  const handleJournalSelection = (selectedJournals) => {// Log selected journals
     setSelectedJournals(selectedJournals); // Update selected journals state
   };
-
-
 
   return (
     <Formik
@@ -113,9 +113,7 @@ const Adminpanel = () => {
         researchNotes: "",
         journals: [],
       }}
-      onSubmit={(values, { setSubmitting }) => {
-        
-        // addInfluencerInfo(values);
+      onSubmit={(values, { setSubmitting }) => { // Log form submission values
         search(values); // Call search without passing searchData
         // setSubmitting(false);
       }}
@@ -129,247 +127,245 @@ const Adminpanel = () => {
       }) => (
         <div className="adminpanel-container">
           <div className="main-content">
-          <div className="main-container">
-            <div className="research-container">
-              <box-icon name="cog" color="teal"></box-icon>
-              <h1 className="main-title">Research Configuration</h1>
-            </div>
-          
-
-          <div className="second-section">
-            <div className="contenedor-botones">
-              <div>
-                <div className="btn-specific">
-                  <button
-                    type="button" // Set type to button to prevent form submission
-                    className={`btn-specific-influencer ${
-                      activeButton === "specific" ? "active" : ""
-                    }`}
-                    onClick={() => {
-                      //handleNavigation("influencer", "specific");
-                      setActiveButton("specific");
-                    }}
-                  > Specific Influencer
-                    <p className="parrafo-btn">
-                      Research a known health influencer by name
-                    </p>
-                  </button>
-                </div>
+            <div className="main-container">
+              <div className="research-container">
+                <box-icon name="cog" color="teal"></box-icon>
+                <h1 className="main-title">Research Configuration</h1>
               </div>
 
-              <div>
-                <div className="btn-specific">
-                  <button
-                    type="button" // Set type to button to prevent form submission
-                    className={`btn-discover-new ${
-                      activeButton === "discover" ? "active" : ""
-                    }`}
-                    onClick={() => {
-                      //handleNavigation("discover", "discover");
-                      setActiveButton("discover");
-                    }}
-                  > Discover New
-                    <p className="parrafo-btn">
-                      Find and analyze new health influencers
-                    </p>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-            <Form onSubmit={handleSubmit}>
               <div className="second-section">
-                <div className="second-section-container">
-                  <div className="timeprogress-tile">
-                    <h3 className="title-time">Time Range</h3>
-                  </div>
-                  <div className="btns-container">
-                    {["Last Week", "Last Month", "Last Year", "All Time"].map(
-                      (range) => (
-                        <button
-                          type="button" // Set type to button to prevent form submission
-                          key={range}
-                          className={`time-btns ${
-                            values.timeRange === range ? "active" : ""
-                          }`}
-                          onClick={() => {
-                            //setTimeRange(range)
-                            setFieldValue("timeRange", range);
-                          }}
-                        >
-                          {range}
-                        </button>
-                      )
-                    )}
+                <div className="contenedor-botones">
+                  <div>
+                    <div className="btn-specific">
+                      <button
+                        type="button" // Set type to button to prevent form submission
+                        className={`btn-specific-influencer ${
+                          activeButton === "specific" ? "active" : ""
+                        }`}
+                        onClick={() => {
+                          setActiveButton("specific");
+                        }}
+                      >
+                        Specific Influencer
+                        <p className="parrafo-btn">
+                          Research a known health influencer by name
+                        </p>
+                      </button>
+                    </div>
                   </div>
 
                   <div>
+                    <div className="btn-specific">
+                      <button
+                        type="button" // Set type to button to prevent form submission
+                        className={`btn-discover-new ${
+                          activeButton === "discover" ? "active" : ""
+                        }`}
+                        onClick={() => {
+                          setActiveButton("discover");
+                        }}
+                      >
+                        Discover New
+                        <p className="parrafo-btn">
+                          Find and analyze new health influencers
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <Form onSubmit={handleSubmit}>
+                <div className="second-section">
+                  <div className="second-section-container">
+                    <div className="timeprogress-tile">
+                      <h3 className="title-time">Time Range</h3>
+                    </div>
+                    <div className="btns-container">
+                      {["Last Week", "Last Month", "Last Year", "All Time"].map(
+                        (range) => (
+                          <button
+                            type="button" // Set type to button to prevent form submission
+                            key={range}
+                            className={`time-btns ${
+                              values.timeRange === range ? "active" : ""
+                            }`}
+                            onClick={() => {
+                              setFieldValue("timeRange", range);
+                            }}
+                          >
+                            {range}
+                          </button>
+                        )
+                      )}
+                    </div>
+
+                    <div>
+                      <div className="influencer-information">
+                        <div className="name-container">
+                          <h4 className="influencer-name">Influencer Name</h4>
+                          <box-icon name="search" color="white"></box-icon>
+                          <Field
+                            type="text"
+                            className="influencer-input"
+                            name="influencerName"
+                            placeholder="Enter Influencer name"
+                            onChange={handleChange}
+                            value={values.influencerName}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="influencer-information">
                       <div className="name-container">
-                        <h4 className="influencer-name">Influencer Name</h4>
+                        <h4 className="influencer-name">
+                          Claims to analyze per Influencer
+                        </h4>
                         <box-icon name="search" color="white"></box-icon>
                         <Field
-                          type="text"
+                          type="number"
                           className="influencer-input"
-                          name="influencerName"
-                          placeholder="Enter Influencer name"
+                          name="claimsPerInfluencer"
+                          placeholder="50"
                           onChange={handleChange}
-                          value={values.influencerName}
+                          value={values.claimsPerInfluencer}
                         />
                       </div>
                     </div>
                   </div>
 
-                  <div className="influencer-information">
-                    <div className="name-container">
-                      <h4 className="influencer-name">
-                        Claims to analyze per Influencer
+                  <div className="Products-finder">
+                    <div className="title-products">
+                      <h3 className="h-productsfinder">
+                        Products to Find Per Influencer
+                      </h3>
+                    </div>
+                    <Field
+                      className="research-input"
+                      type="number"
+                      name="productsPerInfluencer"
+                      value={values.productsPerInfluencer}
+                      onChange={handleChange}
+                    />
+                    <label className="skip-research" htmlFor="input">
+                      Set to 0 to skip research
+                    </label>
+
+                    <div className="Analysis-container">
+                      <h4 className="heading-analysis">
+                        Include Revenue Analysis
                       </h4>
-                      <box-icon name="search" color="white"></box-icon>
-                      <Field
-                        type="number"
-                        className="influencer-input"
-                        name="claimsPerInfluencer"
-                        placeholder="50"
-                        onChange={handleChange}
-                        value={values.claimsPerInfluencer}
+                      <p className="p-analysis">
+                        Analyze monetization methods and estimate earnings
+                      </p>
+                      <Switch
+                        colorScheme="green"
+                        isChecked={values.includeRevenueAnalysis}
+                        onChange={() =>
+                          handleChange({
+                            target: {
+                              name: "includeRevenueAnalysis",
+                              value: !values.includeRevenueAnalysis,
+                            },
+                          })
+                        }
+                      />
+                    </div>
+                    <div className="Analysis-container">
+                      <h4 className="heading-analysis">
+                        Verify with Scientific Journals
+                      </h4>
+                      <p className="p-analysis">
+                        Cross-reference claims with scientific literature
+                      </p>
+                      <Switch
+                        colorScheme="green"
+                        isChecked={values.verifyWithScientificJournals}
+                        onChange={() =>
+                          handleChange({
+                            target: {
+                              name: "verifyWithScientificJournals",
+                              value: !values.verifyWithScientificJournals,
+                            },
+                          })
+                        }
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className="Products-finder">
-                  <div className="title-products">
-                    <h3 className="h-productsfinder">
-                      Products to Find Per Influencer
-                    </h3>
-                  </div>
-                  <Field
-                    className="research-input"
-                    type="number"
-                    name="productsPerInfluencer"
-                    value={values.productsPerInfluencer}
-                    onChange={handleChange}
-                  />
-                  <label className="skip-research" htmlFor="input">
-                    Set to 0 to skip research
-                  </label>
-
-                  <div className="Analysis-container">
-                    <h4 className="heading-analysis">
-                      Include Revenue Analysis
-                    </h4>
-                    <p className="p-analysis">
-                      Analyze monetization methods and estimate earnings
-                    </p>
-                    <Switch
-                      colorScheme="green"
-                      isChecked={values.includeRevenueAnalysis}
-                      onChange={() =>
-                        handleChange({
-                          target: {
-                            name: "includeRevenueAnalysis",
-                            value: !values.includeRevenueAnalysis,
-                          },
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="Analysis-container">
-                    <h4 className="heading-analysis">
-                      Verify with Scientific Journals
-                    </h4>
-                    <p className="p-analysis">
-                      Cross-reference claims with scientific literature
-                    </p>
-                    <Switch
-                      colorScheme="green"
-                      isChecked={values.verifyWithScientificJournals}
-                      onChange={() =>
-                        handleChange({
-                          target: {
-                            name: "verifyWithScientificJournals",
-                            value: !values.verifyWithScientificJournals,
-
-                          },
-                        })
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="section-journals">
-                <Scientificjournals
-                  onJournalSelect={(data) => {
-                    setFieldValue("journals", data);
-                  }}
-                />
-              </div>
-
-              <footer>
-                <div className="footer-container">
-                  <h5 className="footer-heading">
-                    Notes for Research Assistant
-                  </h5>
-                  <Textarea
-                    color="white"
-                    value={values.researchNotes}
-                    onChange={handleChange}
-                    name="researchNotes"
+                <div className="section-journals">
+                  <Scientificjournals
+                    onJournalSelect={(data) => { // Log selected journals from the component
+                      setFieldValue("journals", data);
+                    }}
                   />
                 </div>
-                <div className="btn-container">
-                  <button
-                    className="action-btn"
-                    type="submit" // Only the Start Research button is a submit button
-                  >
-                    {isSubmitting ? "Searching ..." : "+ Start Research"}
-                  </button>
-                  </div>
-              </footer>
-            </Form>
-          </div>
 
-          <div className="results-container">
-            {results.length > 0 && (
-              <div className="results">
-                <h2>Search Results</h2>
-                {results.map((result, index) => (
-                  <div key={index} className="result-item">
-                    <h3>{result.name}</h3>
-                    <p>Total Claims: {result.totalClaims}</p>
-                    <p>Categories: {result.categories.join(", ")}</p>
-                    <p> Trust Score: {result.performanceMetrics.trustScore}%</p>
-                    <p>
-                      Revenue Estimate: $
-                      {result.performanceMetrics.revenueEstimate}
-                    </p>
-                    <p>Followers: {result.performanceMetrics.followers}</p>
-                    <h4>Claims:</h4>
-                    <ul>
-                      {result.claims.map((claim, claimIndex) => (
-                        <li key={claimIndex}>
-                          <strong>{claim.claim}</strong> -{" "}
-                          {claim.verificationStatus} (Sources:{" "}
-                          {claim.sources.join(", ")})
-                        </li>
-                      ))}
-                    </ul>
-                    <h4>Monetization Strategies:</h4>
-                    <ul>
-                      {result.monetizationStrategies.map(
-                        (strategy, strategyIndex) => (
-                          <li key={strategyIndex}>{strategy}</li>
-                        )
-                      )}
-                    </ul>
+                <footer>
+                  <div className="footer-container">
+                    <h5 className="footer-heading">
+                      Notes for Research Assistant </h5>
+                    <Textarea
+                      color="white"
+                      value={values.researchNotes}
+                      onChange={handleChange}
+                      name="researchNotes"
+                    />
                   </div>
-                ))}
-              </div>
-            )}
-          </div>
+                  <div className="btn-container">
+                    <button
+                      className="action-btn"
+                      type="submit" // Only the Start Research button is a submit button
+                    >
+                      {isSubmitting ? "Searching ..." : "+ Start Research"}
+                    </button>
+                  </div>
+                </footer>
+              </Form>
+            </div>
+
+            <div className="results-container">
+              {results.length > 0 && (
+                <div className="results">
+                  <h2>Search Results</h2>
+                  {results.map((result, index) => { // Log each result item
+                    return (
+                      <div key={index} className="result-item">
+                        <h3>{result.name}</h3>
+                        <p>Total Claims: {result.totalClaims}</p>
+                        <p>Categories: {result.categories.join(", ")}</p>
+                        <p> Trust Score: {result.performanceMetrics.trustScore}%</p>
+                        <p>
+                          Revenue Estimate: $
+                          {result.performanceMetrics.revenueEstimate}
+                        </p>
+                        <p>Followers: {result.performanceMetrics.followers}</p>
+                        <h4>Claims:</h4>
+                        <ul>
+                          {result.claims.map((claim, claimIndex) => (
+                            <li key={claimIndex}>
+                              <strong>{claim.claim}</strong> -{" "}
+                              {claim.verificationStatus} (Sources:{" "}
+                              {claim.sources.join(", ")})
+                            </li>
+                          ))}
+                        </ul>
+                        <h4>Monetization Strategies:</h4>
+                        <ul>
+                          {result.monetizationStrategies.map(
+                            (strategy, strategyIndex) => (
+                              <li key={strategyIndex}>{strategy}</li>
+                            )
+                          )}
+                        </ul>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

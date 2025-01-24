@@ -228,6 +228,7 @@
   font-size: 0.7rem;
   border: 1px solid teal;
   margin: 5px;
+  min-width: 100px;
 }
 
 .claim-status {
@@ -249,6 +250,10 @@
 .claim-status.debunked {
   background-color: rgba(231, 76, 60, 0.2);
   color: #e74c3c;
+}
+
+.ResearchSource span{
+  color: rgb(117, 114, 114);
 }
 
 .view-details-btn {
@@ -281,27 +286,25 @@
   font-weight: bold;
 }
 
-.percentage-trustScore[data-trustscore^="8"],
+.percentage-trustScore[data-trustscore^="9"],
 .percentage-trustScore[data-trustscore="100"] {
   color: green;
 }
 
-.percentage-trustScore[data-trustscore^="7"],
-.percentage-trustScore[data-trustscore="80"] {
+.percentage-trustScore[data-trustscore^="8"] {
   color: yellow;
 }
-.percentage-trustScore[data-trustscore^="7"],
-.percentage-trustScore[data-trustscore^="6"],
-.percentage-trustScore[data-trustscore^="5"],
-.percentage-trustScore[data-trustscore^="4"],
-.percentage-trustScore[data-trustscore^="3"],
-.percentage-trustScore[data-trustscore^="2"],
-.percentage-trustScore[data-trustscore^="1"],
-.percentage-trustScore[data-trustscore="0"] {
-  color: red;
-}
 
-/* Responsive Design */
+.percentage-trustScore[data-trustscore^="0"],
+.percentage-trustScore[data-trustscore^="1"],
+.percentage-trustScore[data-trustscore^="2"],
+.percentage-trustScore[data-trustscore^="3"],
+.percentage-trustScore[data-trustscore^="4"],
+.percentage-trustScore[data-trustscore^="5"],
+.percentage-trustScore[data-trustscore^="6"],
+.percentage-trustScore[data-trustscore^="7"] {
+  color: red;
+}/* Responsive Design */
 @media (max-width: 768px) {
   .influencerPage-container {
     flex-direction: column;
