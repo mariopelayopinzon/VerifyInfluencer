@@ -4,8 +4,8 @@ class PerplexityService {
   constructor() {
     this.cache = new Map();
     this.CACHE_DURATION = 24 * 60 * 60 * 1000;
-    this.API_URL = "https://api.perplexity.ai/chat/completions";
-    this.API_TOKEN = "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";
+    this.API_URL = import.meta.env.VITE_PERPLEXITY_API_URL;
+    this.API_TOKEN = import.meta.env.VITE_PERPLEXITY_TOKEN;
 
     // Validate API URL and Token
     if (!this.API_URL || !this.API_TOKEN) {
@@ -82,7 +82,8 @@ class PerplexityService {
       this.validateResponse(parsed);
       return parsed;
     } catch (error) {
-      console.log("parsedResponse", parsedResponse)
+      console.error("Error parsing response:", error); // Log the error directly
+      throw new Error("Failed to parse response"); // Optionally throw an error
     }
   }
 
@@ -138,12 +139,10 @@ class PerplexityService {
   }
 
   async searchInfluencerDetails(options) {
-   
     const prompt = `
       Provide detailed analysis for the health influencer ${options.influencerName}. 
       Include:
-      - Brief description of the influencer
-      - Verified claims
+      - Brief description of the influencer - Verified claims
       - Products
       - Research categories
       - Detailed performance metrics
@@ -153,14 +152,14 @@ class PerplexityService {
       Respond in JSON format with these fields, do not add anything else to the response just the JSON format, nothing else:
       {
         "name": "Influencer Name",
-        "X": "Influencer X username",
+        "xusername": "Influencer X username",
         "description": "Influencer Description",
         "totalClaims": "Number of verified claims",
         "productsPerInfluencer": "Number of recommended products from the influencer",
         "categories": ["Category1", "Category2"],
         "performanceMetrics": {
           "trustScore": "Percentage",
-          "revenueEstimate": "Yearly revenue",
+          "revenueEstimate": "Yearly revenue in USD format and 2 decimal places",
           "followers": "Total followers"
         },
         "claims": [
@@ -169,8 +168,8 @@ class PerplexityService {
             "category": "Research category",
             "verificationStatus": "Verified/Pending/Debunked",
             "sources": ["Research source 1", "Research source 2"],
-            "url":"source url"
-            "trustScore": "Percentage"
+            "url":"source url",
+            "claimtrustScore": "Percentage"
           }
         ],
         "monetizationStrategies": [

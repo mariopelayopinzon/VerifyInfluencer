@@ -90,7 +90,6 @@ const Scientificjournals = ({ onJournalSelect }) => {
     <div
       className="scientific-journals-container"
       style={{
-        background: "rgb(55, 53, 53)",
         padding: "15px",
         borderRadius: "10px",
       }}
@@ -112,7 +111,6 @@ const Scientificjournals = ({ onJournalSelect }) => {
             onClick={selectAll}
             style={{
               marginRight: "10px",
-              backgroundColor: "rgba(0, 128, 128, 0.2)",
               color: "teal",
               border: "none",
               padding: "5px 10px",
@@ -125,7 +123,6 @@ const Scientificjournals = ({ onJournalSelect }) => {
             type="button"
             onClick={deselectAll}
             style={{
-              backgroundColor: "rgba(231, 76, 60, 0.2)",
               color: "#e74c3c",
               border: "none",
               padding: "5px 10px",
@@ -182,7 +179,6 @@ const Scientificjournals = ({ onJournalSelect }) => {
               style={{
                 flex: 1,
                 padding: "10px",
-                backgroundColor: "rgba(30, 29, 29, 0.559)",
                 color: "white",
                 border: "1px solid gray",
                 borderRadius: "5px",

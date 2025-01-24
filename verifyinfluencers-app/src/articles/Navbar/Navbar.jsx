@@ -5,7 +5,7 @@ import 'boxicons';
 
 const Navbar = () => {
   return (
-    <>
+    <div className='navbar-container'>
     <nav className="navbar">
         <div className='Logo-navbar'>
         <box-icon name='shield-alt-2' color='rgb(11, 241, 203)'></box-icon>
@@ -30,7 +30,7 @@ const Navbar = () => {
        <h1 className='Research-tasks'>Research Tasks</h1>
        </div>      
 
-    </>
+    </div>
 
 
   )

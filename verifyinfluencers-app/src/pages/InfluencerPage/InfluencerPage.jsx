@@ -1,44 +1,54 @@
 import React, { useState, useEffect } from "react";
 import { useInfluencerContext } from "../../context/InfluencerContext";
 import "../InfluencerPage/InfluencerPage.css";
-import 'boxicons'
+import "boxicons";
+import axios from "axios";
+import userimage from "../../assets/usuario.png";
 
 const InfluencerPage = () => {
   const ctx = useInfluencerContext();
-  const [profilePhotoUrl, setProfilePhotoUrl] = useState('');
+  const [profilePhotoUrl, setProfilePhotoUrl] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredClaims, setFilteredClaims] = useState([]);
 
   // Use Twitter API SDK to fetch profile photo
-  const fetchProfilePhoto = async () => { 
-    const username = ctx.state.currentInfluencer?.X;
-
-    if (!username) {
-      console.error('No X username found in context');
-      return;
-    }
-
+  const fetchProfilePhoto = async () => {
     try {
-      // Use the context method for fetching Twitter profile image
-      const photoUrl = await ctx.fetchTwitterProfileImage(username);
-      
-      if (photoUrl) {
-        setProfilePhotoUrl(photoUrl);
-      }
+      const username = ctx.state.currentInfluencer.xusername;
+      console.log("username: ", username);
+
+      const BEARER_TOKEN =
+        "AAAAAAAAAAAAAAAAAAAAALkZyQEAAAAAguPE9Gi8Fn4ue6xKzq27JdjGPiw%3DVWLd0ePNWaW3SYSuxSYiltycOzeRT9YlAnO6T1TBkI9GI8IWPT";
+      const url = `/twitter-api/2/users/by/username/${username}?user.fields=profile_image_url`;
+
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${BEARER_TOKEN}`, // Autenticación
+          "Content-Type": "application/json", // Opcional
+        },
+      });
+      console.log("response.data", response.data.data);
+      console.log(
+        "response.data.profile_image_url",
+        response.data.profile_image_url
+      );
+
+      setProfilePhotoUrl(response.data.data.profile_image_url);
     } catch (error) {
-      console.error('Error fetching profile photo:', error);
+      console.error("Error fetching profile photo:", error);
     }
   };
 
   // Fetch profile photo when component mounts or currentInfluencer changes
   useEffect(() => {
-    fetchProfilePhoto();
-  }, [ctx.state.currentInfluencer]);
-
+    if (!profilePhotoUrl) fetchProfilePhoto();
+  }, [profilePhotoUrl]);
+  //ctx.state.currentInfluencer
   const influencerDetails = {
     name: "Sanjay Gupta",
     totalClaims: "57",
-    description: "Sanjay is a medical journalist and a CNN chief medical correspondent. He has been a part of",
+    description:
+      "Sanjay is a medical journalist and a CNN chief medical correspondent. He has been a part of",
     categories: ["Health", "Medicine", "Innovation"],
     performanceMetrics: {
       trustScore: "High",
@@ -51,15 +61,16 @@ const InfluencerPage = () => {
         claim: "Expertise in neurosurgery and interventional radiology",
         category: "Health",
         verificationStatus: "Verified",
-        claimsTrustScore: "87%",
+        claimstrustScore: "87%",
         sources: ["Emory University Hospital", "CNN"],
         url: "https://faculty.mdanderson.org/profiles/sanjay_gupta.html",
       },
       {
-        claim: "Research focus on targeted drug delivery methods for cancer treatment",
+        claim:
+          "Research focus on targeted drug delivery methods for cancer treatment",
         category: "Health",
         verificationStatus: "Verified",
-        claimsTrustScore: "Percentage of trust score per claim",
+        claimstrustScore: "87%",
         sources: ["The University of Texas MD Anderson Cancer Center"],
         url: "https://faculty.mdanderson.org/profiles/sanjay_gupta.html",
       },
@@ -67,7 +78,7 @@ const InfluencerPage = () => {
         claim: "Highly influential in the healthcare space with 2.5M followers",
         category: "Health",
         verificationStatus: "Verified",
-        claimsTrustScore: "Percentage of trust score per claim",
+        claimstrustScore: "87%",
         sources: ["Agility PR"],
         url: "https://www.agilitypr.com/resources/top-influencers/top-10-us-social-media-influencers-healthcare/",
       },
@@ -75,7 +86,7 @@ const InfluencerPage = () => {
         claim: "Highly influential in the healthcare space with 2.5M followers",
         category: "Health",
         verificationStatus: "Verified",
-        claimsTrustScore: "Percentage of trust score per claim",
+        claimstrustScore: "87%",
         sources: ["Agility PR"],
         url: "https://www.agilitypr.com/resources/top-influencers/top-10-us-social-media-influencers-healthcare/",
       },
@@ -83,11 +94,10 @@ const InfluencerPage = () => {
         claim: "Highly influential in the healthcare space with 2.5M followers",
         category: "Health",
         verificationStatus: "Verified",
-        claimsTrustScore: "Percentage of trust score per claim",
+        claimstrustScore: "87%",
         sources: ["Agility PR"],
         url: "https://www.agilitypr.com/resources/top-influencers/top-10-us-social-media-influencers-healthcare/",
       },
-      
     ],
     monetizationStrategies: [
       "Influencer marketing partnerships",
@@ -110,28 +120,22 @@ const InfluencerPage = () => {
   };
 
   return (
-    <>
-      <header className="influencerPage-header">
+    <div className="influencerPage-container">
+      <div className="influencerPage-header">
         <div className="influencer-container">
           <div className="influencer-image">
-            <img 
-              src={
-                profilePhotoUrl || 
-                ctx.state.currentInfluencer?.socialMedia?.profilePhotoUrl ||
-                "../../assets/usuario.png"
-              } 
-              alt={`${influencerDetails.name} profile`} 
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "../../assets/usuario.png";
-              }}
+            <img
+              src={profilePhotoUrl || userimage}
+              alt={`${influencerDetails.name} profile`}
             />
           </div>
           <div className="influencer-header">
             <h1 className="influencer-name">{influencerDetails.name}</h1>
             <div>
-              <p className="influencer-description">{influencerDetails.description}</p>
-            </div> 
+              <p className="influencer-description">
+                {influencerDetails.description}
+              </p>
+            </div>
             <div className="influencer-categories">
               {influencerDetails.categories.map((category, index) => (
                 <span key={index} className="category-tag">
@@ -139,24 +143,29 @@ const InfluencerPage = () => {
                 </span>
               ))}
             </div>
+          </div>
+        </div>
+      </div>
 
-            <div className="performance-metrics">
+      <div className="performance-metrics">
               <div className="metric-item">
                 <span className="metric-label">Trust Score</span>
-                <box-icon name='trending-up' color='teal'></box-icon>
+                <box-icon name="trending-up" color="teal"></box-icon>
                 <span className="metric-value">
-                  {influencerDetails.performanceMetrics.trustScore}
+                  {influencerDetails.performanceMetrics.trustScore}%
                 </span>
                 <div>
-                  <p>Based on {influencerDetails.totalClaims} verified claims</p>
+                  <p>
+                    Based on {influencerDetails.totalClaims} verified claims
+                  </p>
                 </div>
               </div>
 
               <div className="metric-item">
                 <span className="metric-label">Yearly Revenue</span>
-                <box-icon name='dollar' color='teal'></box-icon>
+                <box-icon name="dollar" color="teal"></box-icon>
                 <span className="metric-value">
-                  {influencerDetails.performanceMetrics.revenueEstimate}
+                  ${influencerDetails.performanceMetrics.revenueEstimate}
                 </span>
                 <div>
                   <p>Estimated earnings</p>
@@ -164,7 +173,7 @@ const InfluencerPage = () => {
               </div>
               <div className="metric-item">
                 <span className="metric-label">Products</span>
-                <box-icon name='shopping-bag' color='teal'></box-icon>
+                <box-icon name="shopping-bag" color="teal"></box-icon>
                 <span className="metric-value">
                   {influencerDetails.productsPerInfluencer}
                 </span>
@@ -174,7 +183,7 @@ const InfluencerPage = () => {
               </div>
               <div className="metric-item">
                 <span className="metric-label">Followers</span>
-                <box-icon name='trending-up' color='teal'></box-icon>
+                <box-icon name="trending-up" color="teal"></box-icon>
                 <span className="metric-value">
                   {influencerDetails.performanceMetrics.followers}
                 </span>
@@ -183,11 +192,8 @@ const InfluencerPage = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </header>
-      
-      <main className="mainClaims-content">
+
+      <div className="mainClaims-content">
         <div className="claims-search-container">
           <input
             type="text"
@@ -232,17 +238,20 @@ const InfluencerPage = () => {
                     }}
                   >
                     View Source
-                  </button> </div>
-                  <div className="claim-trustScore">
-                    <span className="title-trustScore">Trust Score</span>
-                    <span className="percentage-trustScore">{claim.claimsTrustScore}</span>
-                  </div>
+                  </button>{" "}
+                </div>
+                <div className="claim-trustScore">
+                  <span className="title-trustScore">Trust Score</span>
+                  <span className="percentage-trustScore" data-trustscore='85%'>
+                    {claim.claimtrustScore}%
+                  </span>
+                </div>
               </div>
             ))}
           </div>
         </div>
-      </main>
-    </>
+      </div>
+    </div>
   );
 };
 

@@ -1,25 +1,16 @@
-* {
-  padding: 0;   
-  margin: 0;
-  box-sizing: border-box;
-  background-color:rgb(16, 14, 18);
-}
-
-body   {
-  color: white;
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
+.influencerPage-container{
+  background-color: rgb(16, 14, 18);
+  min-width: 1200px
 }
 
 .influencerPage-header {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  display: inline;
+
 }
 
 .influencer-description {
   color: rgb(141, 141, 141);
-  font-size: 12PX;
+  font-size: 14px;
   margin-bottom: 10px;
 }
 
@@ -28,48 +19,40 @@ body   {
   margin: 0 auto;
   padding: 20px;
   display: flex;
-  align-items: flex-start;
 }
 
 .influencer-image {
-  width: 250px;
-  height: 250px;
-  margin-right: 30px;
+  width: 150px;
+  height: 150px;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  margin: 20px;
+  
 }
 
 .influencer-image img {
-
-  width: 200px;
-  height: 200px;
+  min-width: 150px;
+  min-height: auto;
   object-fit: cover;
   border-radius: 50%;
   justify-items: center;
-  background-color: #a0a0a0;
-
 }
 
 .influencer-header {
   flex-grow: 1;
-  justify-content: flex-start;
-  
+  justify-content: space-around;
 }
 
 .influencer-name {
   color: rgb(211, 209, 209);
   font-size: 2.5rem;
   margin-bottom: 10px;
-  background-color: rgba(45, 38, 38, 0);
-
 }
 
 .influencer-categories {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 10px;
-  margin-bottom: 20px;
 }
 
 .category-tag {
@@ -84,24 +67,22 @@ body   {
 
 .category-tag:hover {
   background-color: teal;
-  color: black;
+  color: white;
 }
 
-.performance-metrics  {
+.performance-metrics {
   display: inline-flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  gap: 10px;
-  height: fit-content;
+  justify-content: space-around;
+  margin: 30px;
+  gap: 20px;
+  display: flex;
 }
 
 .metric-item {
-  justify-content: space-around;
-  gap: 8px;
+  min-width: 200px;
+  min-height: 150px;
   display: inline-block;
   flex: 1;
-  max-width: fit-content;
-  max-height: fit-content;
   background-color: rgba(30, 30, 30, 0.5);
   border: 1px solid rgba(128, 128, 128, 0.2);
   border-radius: 10px;
@@ -114,23 +95,18 @@ body   {
   transform: scale(1.03);
 }
 
-.metric-item box-icon{
-  margin-left: 50px;
+.metric-item box-icon {
+  margin-left: 70px;
+  padding-left: 5px;
   margin-bottom: 15px;
-  padding-right: 0px;
-  margin-right: 0px;
-  display: inline-flex;
-  right: 0;
 }
 
-.mainClaims-content{
+.mainClaims-content {
   display: inline-flexbox;
-
 }
 
-.metric-item p{ 
+.metric-item p {
   color: rgb(123, 120, 120);
-  ;
 }
 
 .metric-value {
@@ -141,7 +117,6 @@ body   {
   margin-bottom: 5px;
   background-color: none;
   margin-top: 10px;
-
 }
 
 .metric-label {
@@ -163,11 +138,11 @@ body   {
 
 .claims-search-input {
   flex-grow: 1;
-  padding: 12px;
+  padding: 10px 20px;
   color: white;
   border: 1px solid rgba(128, 128, 128, 0.2);
   border-radius: 2.5px;
-  
+  background-color: black;
 }
 
 .search-claims-btn {
@@ -220,7 +195,6 @@ body   {
   align-items: center;
   transition: transform 0.3s ease;
   align-items: center;
-
 }
 
 .claim-card:hover {
@@ -260,7 +234,6 @@ body   {
   font-size: 0.8rem;
   padding: 3px 8px;
   border-radius: 15px;
-
 }
 
 .claim-status.verified {
@@ -293,26 +266,52 @@ body   {
   background-color: #00a0a0;
 }
 
-.claim-trustScore{
+.claim-trustScore {
   color: white;
-  display: flex;
   justify-content: right;
   align-items: center;
-  margin-top: 0px; 
-  gap: 10px;
+  margin-top: 0px;
+  display: block;
+  padding: 20px;
+  min-width: 10px;
 }
 
+.percentage-trustScore {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.percentage-trustScore[data-trustscore^="8"],
+.percentage-trustScore[data-trustscore="100"] {
+  color: green;
+}
+
+.percentage-trustScore[data-trustscore^="7"],
+.percentage-trustScore[data-trustscore="89"] {
+  color: yellow;
+}
+.percentage-trustScore[data-trustscore^="7"],
+.percentage-trustScore[data-trustscore^="6"],
+.percentage-trustScore[data-trustscore^="5"],
+.percentage-trustScore[data-trustscore^="4"],
+.percentage-trustScore[data-trustscore^="3"],
+.percentage-trustScore[data-trustscore^="2"],
+.percentage-trustScore[data-trustscore^="1"],
+.percentage-trustScore[data-trustscore="0"] {
+  color: red;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .influencer-container {
+  .influencerPage-container {
     flex-direction: column;
     align-items: center;
+    min-width: 1200px;
+    
   }
 
   .influencer-image {
     margin-right: 0;
     margin-bottom: 20px;
-    background-color: red;
   }
 }

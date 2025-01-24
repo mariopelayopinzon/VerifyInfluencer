@@ -1,34 +1,39 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+
 
 body {
-  background-color: black;
   color: white;
   font-family: Arial, sans-serif;
 }
 
+.adminpanel-container {
+  background-color: rgb(23, 22, 22);
+  padding: 0;
+  margin: 0;
+ }
+
+ .main-content {
+  display: flex;
+  flex-direction: column;
+ }
+
 .main-container {
-  max-width: 1200px;
   margin: 0 auto;
-  border: 2px solid gray;
-  background-color: black;
   padding: 20px;
 }
 
 .research-container {
   display: flex;
   padding: 25px;
-  justify-content: flex-start;
+  justify-content:left;
   align-items: center;
   gap: 0.4rem;
+  
 }
 
 .main-title {
   color: white;
   font-weight: 700;
+  
 }
 
 .contenedor-botones {
@@ -45,11 +50,11 @@ body {
 .btn-specific-influencer,
 .btn-discover-new {
   width: 100%;
+  min-width: 550px;
   padding: 30px;
   text-align: center;
   border: 2px solid gray;
   border-radius: 10px;
-  background-color: rgba(48, 47, 47, 0.331);
   color: white;
   cursor: pointer;
   display: flex;
@@ -72,31 +77,26 @@ body {
 }
 
 .main-content {
-  border: 2px solid gray;
-  padding: 20px;
-  margin: 20px 0;
-  background-color: rgb(55, 53, 53);
+  padding: 30px;
+  margin: 0 0;
 }
 
 .second-section {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  background-color: rgb(55, 53, 53);
   gap: 20px;
 }
 
 .second-section-container {
   flex: 1;
-  background-color: rgba(30, 29, 29, 0.559);
-  padding: 20px;
+  padding: 15px;
 }
 
 .title-time {
   color: white;
   font-weight: 500;
   margin-bottom: 10px;
-  background-color: rgb(55, 53, 53);
 }
 
 .btns-container {
@@ -104,8 +104,6 @@ body {
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   width: 100%;
-  padding: 20px;
-  background-color: rgba(30, 29, 29, 0.559);
 }
 
 .time-btns {
@@ -114,7 +112,6 @@ body {
   text-align: center;
   border: 2px solid gray;
   border-radius: 10px;
-  background-color: rgba(48, 47, 47, 0.331);
   color: white;
 }
 
@@ -125,43 +122,38 @@ body {
 
 .Products-finder {
   flex: 1;
-  background-color: rgb(55, 53, 53);
   padding: 20px;
 }
 
 .title-products {
   position: relative;
   justify-content: flex-start;
-  padding-right: 350px;
   margin-bottom: 10px;
-  background-color: rgb(55, 53, 53);
 }
 
-.h-productsfinder {
+.h-productsfinder {  
   color: white;
   font-weight: 500;
   padding-top: 10px;
   margin-bottom: 10px;
-  background-color: rgb(55, 53, 53);
+  font-size: 16px;
 }
 
 .research-input {
   width: 100%;
-  background-color: rgba(30, 29, 29, 0.559);
-  border: 2px solid gray;
+  border: 1px solid gray;
   border-radius: 10px;
   color: white;
   padding: 5px;
   font-weight: 300;
+  background-color: rgb(23, 22, 22);
 }
 
 .skip-research {
   color: rgb(181, 179, 179);
-  background-color: rgb(55, 53, 53);
 }
 
 .Analysis-container {
-  background-color: rgba(30, 29, 29, 0.559);
   display: flex;
   padding: 20px;
   align-items: center;
@@ -170,64 +162,68 @@ body {
 
 .heading-analysis {
   color: white;
+  font-size: 14px;
 }
 
 .p-analysis {
   color: gray;
   margin-right: 10px;
+  font-size: 12px;
 }
 
-.name-container {
-  display: flex;
-  padding: 10px;
-  gap: 20px;
-  align-items: center;
-  background-color: rgb(55, 53, 53);
-}
+  .name-container h4 {
+    font-size: 14px;
+  }
 
-.influencer-name {
-  color: white;
-  background-color: rgb(55, 53, 53);
-}
+  .name-container box-icon {
+    color: white;
+    position: absolute;
+    justify-content: center;
+    justify-self: center;
+    padding-top: 7px;
+  }
 
 .influencer-input {
   border: 1px solid gray;
   border-radius: 5px;
   width: 500px;
-  padding: 5px 15px;
+  padding: 5px 20px;
   color: rgb(171, 170, 170);
+  background-color: rgb(23, 22, 22);
 }
 
 .footer-container {
   padding: 10px;
-  background-color: rgb(55, 53, 53);
 }
 
 .footer-heading {
   color: white;
   font-size: 12px;
-  background-color: rgb(55, 53, 53);
 }
 
 .btn-container {
   display: flex;
   justify-content: flex-end;
   padding: 15px;
-  background-color: rgb(55, 53, 53);
 }
 
 .action-btn {
-  background-color: rgba(92, 92, 92, 0.751);
   padding: 10px;
   color: white;
   border-radius: 5px;
   font-weight: 700;
   border: 2px solid gray;
+  min-width: 200px;
 }
 
 .action-btn:hover {
   background-color: rgba(13, 158, 35, 0.751);
 }
+
+.action-btn p:hover{
+  background-color: rgba(13, 158, 35, 0.751);
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -251,5 +247,11 @@ body {
 .time-btns.active,
 .btn-specific-influencer.active,
 .btn-discover-new.active {
+  background-color: rgb(78, 195, 125);
+}
+
+.time-btns.active p,
+.btn-specific-influencer.active p,
+.btn-discover-new.active p{
   background-color: rgb(78, 195, 125);
 }

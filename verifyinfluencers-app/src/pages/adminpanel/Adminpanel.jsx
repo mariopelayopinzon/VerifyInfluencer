@@ -71,7 +71,7 @@ const Adminpanel = () => {
           searchOptions
         );
 
-        console.log("results", results);
+        console.log("resultsxxx", results);
 
         dispatch({
           type: "SET_CURRENT_INFLUENCER",
@@ -100,30 +100,7 @@ const Adminpanel = () => {
     setSelectedJournals(selectedJournals); // Update selected journals state
   };
 
-  // Function to clear cache
-  const clearCache = () => {
-    perplexityService.clearCache();
-    toast({
-      title: "Cache Cleared",
-      description: "All cached data has been removed",
-      status: "warning",
-      duration: 3000,
-      isClosable: true,
-    });
-  };
 
-  // Function to show cache statistics
-  const showCacheStats = () => {
-    const stats = perplexityService.getCacheStats();
-    toast({
-      title: "Cache Statistics",
-      description: `Entries: ${stats.size}`,
-      status: "info",
-      duration: 3000,
-      isClosable: true,
-    });
-    console.log("Cache Stats:", stats);
-  };
 
   return (
     <Formik
@@ -151,15 +128,16 @@ const Adminpanel = () => {
         isSubmitting,
         setFieldValue,
       }) => (
-        <>
+        <div className="adminpanel-container">
+          <div className="main-content">
           <div className="main-container">
             <div className="research-container">
               <box-icon name="cog" color="teal"></box-icon>
               <h1 className="main-title">Research Configuration</h1>
             </div>
-          </div>
+          
 
-          <section>
+          <div className="second-section">
             <div className="contenedor-botones">
               <div>
                 <div className="btn-specific">
@@ -172,9 +150,9 @@ const Adminpanel = () => {
                       //handleNavigation("influencer", "specific");
                       setActiveButton("specific");
                     }}
-                  >
+                  > Specific Influencer
                     <p className="parrafo-btn">
-                      Research a known health influencer by
+                      Research a known health influencer by name
                     </p>
                   </button>
                 </div>
@@ -191,7 +169,7 @@ const Adminpanel = () => {
                       //handleNavigation("discover", "discover");
                       setActiveButton("discover");
                     }}
-                  >
+                  > Discover New
                     <p className="parrafo-btn">
                       Find and analyze new health influencers
                     </p>
@@ -199,11 +177,10 @@ const Adminpanel = () => {
                 </div>
               </div>
             </div>
-          </section>
+          </div>
 
-          <main className="main-content">
             <Form onSubmit={handleSubmit}>
-              <section className="second-section">
+              <div className="second-section">
                 <div className="second-section-container">
                   <div className="timeprogress-tile">
                     <h3 className="title-time">Time Range</h3>
@@ -322,16 +299,16 @@ const Adminpanel = () => {
                     />
                   </div>
                 </div>
-              </section>
+              </div>
 
-              <section className="section-journals">
+              <div className="section-journals">
                 <Scientificjournals
                   onJournalSelect={(data) => {
                     console.log("ss", data);
                     setFieldValue("journals", data);
                   }}
                 />
-              </section>
+              </div>
 
               <footer>
                 <div className="footer-container">
@@ -339,7 +316,6 @@ const Adminpanel = () => {
                     Notes for Research Assistant
                   </h5>
                   <Textarea
-                    bg="rgba(30, 29, 29, 0.559)"
                     color="white"
                     value={values.researchNotes}
                     onChange={handleChange}
@@ -353,18 +329,10 @@ const Adminpanel = () => {
                   >
                     {isSubmitting ? "Searching ..." : "+ Start Research"}
                   </button>
-                  <button className="cache-btn" onClick={clearCache}>
-                    Clear Cache
-                  </button>
-                  <button className="cache-stats-btn" onClick={showCacheStats}>
-                    Cache Stats
-                  </button>
-                </div>
-                {error && <div className="error-message">{error}</div>}{" "}
-                {/* Display error message if exists */}
+                  </div>
               </footer>
             </Form>
-          </main>
+          </div>
 
           <div className="results-container">
             {results.length > 0 && (
@@ -404,7 +372,8 @@ const Adminpanel = () => {
               </div>
             )}
           </div>
-        </>
+          </div>
+        </div>
       )}
     </Formik>
   );
